@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    	<title>Subdomain Proxy Example</title>
+        <script>
+        // This file *should* set document.domain to the publisher's domain,
+        // but for the demo to run off an unconfigured localhost, we've left
+        // this out.
+
+        //document.domain = 'publisher.com';
+        </script>
+    </head>
+    <body>
+    	<h1>Subdomain Proxy Example</h1>
+
+        <p>This example uses an iframe proxy to communicate with an API endpoint using AJAX.</p>
+
+        <p>Response:</p>
+
+        <pre><code id="output"></code></pre>
+
+        <script>
+            function getProductData(id) {
+                var iframe = document.createElement('iframe');
+                iframe.src = 'proxy.html';
+             
+                function onready() {
+                    iframe.contentWindow.jQuery.ajax({
+                        method: 'GET',
+                        url: 'products.php',
+                        data: { product: id },
+                        success: function(resp) {
+                            document.getElementById('output').innerHTML = resp;
+                        }
+                    });
+                }
+
+                if (iframe.addEventListener) {
+                    iframe.addEventListener('load', onready, false);
+                } else {
+                    iframe.attachEvent('onload', function() {
+                        if (/complete|loaded/.test(iframe.readyState))
+                            onready();
+                    });
+                }
+
+                document.getElementsByTagName('head')[0].appendChild(iframe);
+            }
+
+            getProductData(1337);
+        </script>
+    </body>
+</html>
