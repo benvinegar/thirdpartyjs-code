@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <script>
+      function log(msg) {
+        var el = document.getElementById('log');
+        el.innerHTML += '<br>' + msg;
+      }
+
+      function start() {
+        log('Creating iframe');
+
+        var el = document.createElement('iframe');
+        var bd = document.getElementsByTagName('body')[0];
+        var url = 'http://localhost:9998/client.html';
+
+        el.style.display = 'none';
+        el.src = 'http://localhost:9999/server.html?' + encodeURIComponent(url);
+        bd.appendChild(el);
+
+        var listener = function () {
+          var hash = location.hash;
+
+          if (hash && hash != '#') {
+            log("Incoming: " + hash.replace('#', ''));
+            window.location.href = url + '#';
+          }
+
+          setTimeout(listener, 100);
+        };
+
+        listener();
+      }
+    </script>
+  </head>
+
+  <body>
+    <button onclick="start()">Start</button>
+    <pre id="log"></pre>
+  </body>
+</html>

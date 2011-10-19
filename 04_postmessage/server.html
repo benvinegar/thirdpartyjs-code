@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <script>
+      function init() {
+        window.parent.postMessage("Hello, World", "http://localhost:9998");
+      }
+    </script>
+  </head>
+
+  <body onload="init()"></body>
+</html>

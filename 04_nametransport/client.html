@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <script>
+      function log(msg) {
+        var el = document.getElementById('log');
+        el.innerHTML += '<br>' + msg;
+      }
+
+      function start() {
+        log('Creating iframe');
+
+        var el = document.createElement('iframe');
+        var bd = document.getElementsByTagName('body')[0];
+
+        el.style.display = 'none';
+        el.src = 'http://localhost:9999/server.html';
+
+        var done = false;
+        el.onreadystatechange = function () {
+          if (!el.readyState == 'complete' || done)
+            return;
+
+          log('Listening');
+          var name = el.contentWindow.name;
+          if (name) {
+            log('Data: ' + el.contentWindow.name);
+            done = true;
+          }
+        };
+
+        bd.appendChild(el);
+      }
+    </script>
+  </head>
+
+  <body>
+    <button onclick="start()">Start</button>
+    <pre id="log"></pre>
+  </body>
+</html>

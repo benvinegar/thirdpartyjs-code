@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <script>
+      function init() {
+        var url = window.location.href;
+        url = url.split('?')[1].replace('?', '');
+        window.parent.location = decodeURIComponent(url) + '#helloworld';
+      }
+    </script>
+  </head>
+
+  <body onload="init()"></body>
+</html>
