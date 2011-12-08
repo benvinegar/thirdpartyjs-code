@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    	<title>Using iframes</title>
+    </head>
+    <body>
+    	<h1>Using iframes</h1>
+
+        <h3>src-less iframe</h3>
+        
+        <script id="src-less">
+            var iframe = document.createElement('iframe');
+            iframe.style.width = '300px';
+            iframe.style.height = '250px';
+            iframe.style.border = 'none';
+
+            var insert = document.getElementById('src-less');
+            insert.parentNode.insertBefore(iframe, insert);
+
+            iframe.contentWindow.document.write(
+                '<h3>Fugi QuickCam 3000</h3>' +
+                '<img src="camera-stock-150.jpg"/>' +
+                '<p>$299.99</p>'
+            );
+        </script>
+
+        <h3>External iframe</h3>
+
+        <script id="external">
+            var iframe = document.createElement('iframe');
+            iframe.style.width = '300px';
+            iframe.style.height = '250px';
+            iframe.style.border = 'none';
+            iframe.src = 'iframe.html';
+
+            var insert = document.getElementById('external');
+            insert.parentNode.insertBefore(iframe, insert);
+        </script>
+    </body>
+</html>

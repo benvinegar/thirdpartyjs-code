@@ -6,4 +6,4 @@ The examples correspond to material from the book, and mostly illustrate third-p
 
 Feedback and comments are welcome.
 
-![Third-party JavaScript](https://github.com/benvinegar/thirdpartyjs-code/raw/master/book.png)
+![Third-party JavaScript](http://github.com/thirdpartyjs/thirdpartyjs-code/raw/master/book.png)
