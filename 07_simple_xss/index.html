@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Simple XSS attack</title>
+        <script src="./simple_xss.js"></script>
+        <style>
+            body {
+                font-family: Arial;
+                font-size: 10pt;
+            }
+
+            h4 {
+                font-weight: normal;
+                font-size: 120%;
+            }
+
+            textarea {
+                display: block;
+                width: 400px;
+                height: 100px;
+            }
+
+            button {
+                margin-top: 20px;
+            }
+        </style>
+    </head>
+
+    <body onload="load();">
+        <h4>Review:</h4>
+        <form action="display.php" method="POST">
+            <textarea name="review" id="review"></textarea>
+            <p>To see simple XSS vulnerability in action, just press
+                <button type="submit">Send</button></p>
+        </form>
+    </body>
+</html>

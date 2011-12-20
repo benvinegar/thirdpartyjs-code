@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+
+<html>
+    <body>
+        <script>
+            // Supposed to be color like #000 but attackers use it to inject their code into an
+            // iframe.
+            var color = "#000;x:expression(alert('Hello, World!'))";
+            var iframe = document.createElement('iframe');
+
+            iframe.src = './iframe.html?color=' + encodeURIComponent(color);
+            document.body.appendChild(iframe);
+        </script>
+    </body>
+</html>
