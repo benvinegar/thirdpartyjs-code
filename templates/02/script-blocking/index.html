@@ -7,7 +7,8 @@
     <p>Below this line of text is a standard &lt;script&gt; include that loads a slow-loading JavaScript file. Below that script include is further page content, but it will not appear until the script has finished loading (3 seconds).</p>
     
     <img src="/static/loading.gif"/>
-    <!-- <script src="slow.php"></script>-->
+    
+    <script src="slow.js"></script>
     <p>This part of the document won't render until the script is loaded.</p>
     
     <hr/>
@@ -26,7 +27,7 @@
         // Append a timestamp to the script URL so that the browser
         // treats this as a separate file (doesn't cache the response from
         // earlier).
-        script.src   = 'slow.php?' + (new Date()).getTime();
+        script.src   = 'slow.js?' + (new Date()).getTime();
 
         var entry = document.getElementsByTagName('script')[0];
         entry.parentNode.insertBefore(script, entry);

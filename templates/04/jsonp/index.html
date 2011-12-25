@@ -2,6 +2,7 @@
 
 {% block content %}
     <script src="/static/json2.js"></script>
+
 	<h1>JSONP Example</h1>
 
 	<p>JSONP Response:</p>
@@ -17,7 +18,7 @@
 	
 	script.type = 'text/javascript';
 	script.async = true;
-	script.src = 'endpoint.php?callback=jsonpCallback';
+	script.src = 'endpoint.jsonp?callback=jsonpCallback';
 
 	document.body.appendChild(script);
 	</script>

@@ -1,6 +1,5 @@
-<?php
-
-header("Content-type: application/javascript");
+{{ request.args.get('callback') }}
+<!--
 
 $callback = $_GET['callback'];
 
@@ -11,3 +10,4 @@ $book = json_encode(array(
 ));
 
 echo "$callback($book);";
+-->
