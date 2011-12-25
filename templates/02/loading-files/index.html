@@ -1,0 +1,97 @@
+{% extends 'example.html' %}
+
+{% block content %}
+    <h1>Dynamic file loading (JS, CSS)</h1>
+
+    <p>This example loads two files, lib.js and styles.css, dynamically via JavaScript.</p>
+
+    <p id="css-ready-sentence">When styles.css is loaded, this sentence will appear blue.</p>
+
+    <script>
+
+    var log = function() {
+        var script = document.getElementsByTagName('script')[0],
+            start  = (new Date).getTime();
+
+        return function(str) {
+            var div = document.createElement('div');
+            div.innerHTML = str + ' (' + ((new Date).getTime() - start) + 'ms)';
+            script.parentNode.insertBefore(div, script);
+        }
+    }();
+
+    function loadScript(url, callback) {
+        var script = document.createElement('script'); 
+
+        script.type  = 'text/javascript';
+        script.async = true;
+        script.src   = url
+
+        var entry = document.getElementsByTagName('script')[0];
+        entry.parentNode.insertBefore(script, entry);
+
+        if (script.addEventListener)
+            script.addEventListener('load', callback, false);
+        else {
+            script.attachEvent('onreadystatechange', function() {
+                if (/complete|loaded/.test(script.readyState))
+                    callback();
+            });
+        }
+    }
+
+    function loadStylesheet(url, callback) {
+        var link = document.createElement('link');
+        
+        link.rel  = 'stylesheet';
+        link.type = 'text/css';
+        link.href = url;
+        
+        // Append <link/> tag
+        var entry = document.getElementsByTagName('script')[0];
+        entry.parentNode.insertBefore(link, entry);
+
+        // Append test element
+        var testElem = document.createElement('span');
+        testElem.id = 'css-ready';
+
+        entry.parentNode.insertBefore(testElem, entry);
+
+        (function() {
+            var node = document.getElementById('css-ready');
+
+            if (window.getComputedStyle) {
+                value = document.defaultView
+                    .getComputedStyle(node, null)
+                    .getPropertyValue('color');
+            }
+            else if (testElem.currentStyle) {
+                value = node.currentStyle['color'];
+            }
+        
+            if (value && value === 'rgb(121, 121, 121)' || value === '#797979') {
+                callback();
+            } else {
+                // Timeout can be whatever you choose
+                setTimeout(arguments.callee, 100);
+            }
+        })();
+    }
+
+    log('Loading lib.js');
+    loadScript('lib.js', function() {
+        log('&hellip; Callback fired');
+
+        // I've chosen to load these sequentially to improve
+        // the presentation of the example HTML file. But really,
+        // you should load these sequentially.
+        log('Loading styles.css');
+        loadStylesheet('styles.css', function() {
+            log('&hellip; Callback fired');
+        });
+    });
+    </script>
+
+
+    <p>Tested in Chrome 13, Safari 5, Firefox 5, IE 7+, Opera 11.</p>
+{% endblock %}

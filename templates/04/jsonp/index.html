@@ -1,0 +1,27 @@
+{% extends 'example.html' %}
+
+{% block content %}
+    <script src="/static/json2.js"></script>
+	<h1>JSONP Example</h1>
+
+	<p>JSONP Response:</p>
+
+	<pre><code id="response"></code></pre>
+
+	<script>
+	window.jsonpCallback = function(data) {
+		document.getElementById('response').innerHTML = JSON.stringify(data);
+	}
+
+	var script = document.createElement('script');
+	
+	script.type = 'text/javascript';
+	script.async = true;
+	script.src = 'endpoint.php?callback=jsonpCallback';
+
+	document.body.appendChild(script);
+	</script>
+
+
+    <p>Tested in Chrome 13, Safari 5, Firefox 5, IE 7+, Opera 11.</p>
+{% endblock %}

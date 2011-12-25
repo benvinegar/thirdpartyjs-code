@@ -1,0 +1,85 @@
+{% extends 'example.html' %}
+
+{% block head %}
+    {{ super() }}
+
+    <script src="/static/common/json2.js"></script>
+    <style>
+        .result { width: 200px; background-color: #8f8;}
+    </style>
+{% endblock %}
+
+{% block content %}
+    <h1>Passing script arguments</h1>
+
+    <p>This example demonstrates a third-party script capturing publisher-defined parameters. Three (3) methods are used: using the query string, fragment identifier (#), and global variable arrays.</p>
+
+    <h2>Query string</h2>
+
+    <code>querystring.js?foo=bar</code>
+
+    <pre><code class="result" id="query-string-out"></code></pre>
+
+    <script>
+    (function() {
+        var script = document.createElement('script'); 
+
+        script.type  = 'text/javascript';
+        script.async = true;
+        script.src   = '/static/examples/02/passing-args/querystring.js?foo=bar';
+
+        var entry = document.getElementsByTagName('script')[0];
+        entry.parentNode.insertBefore(script, entry);
+    }());
+    </script>
+
+
+    <h2>Fragment identifier (#)</h2>
+
+    <code>fragment.js#foo=bar</code>
+
+    <pre><code class="result" id="fragment-ident-out"></code></pre>
+
+    <script>
+    (function() {
+        var script = document.createElement('script'); 
+
+        script.type  = 'text/javascript';
+        script.async = true;
+        script.src   = '/static/examples/02/passing-args/fragment.js#foo=bar';
+
+        var entry = document.getElementsByTagName('script')[0];
+        entry.parentNode.insertBefore(script, entry);
+    }());
+    </script>
+
+    <h2>Global variable arrays</h2>
+
+    <pre><code>Stork.foo = Stork.foo || [];
+Stork.foo.push('bar');</code></pre>
+
+    <pre><code class="result" id="global-var-out"></code></pre>
+
+
+    <script>
+    var Stork = window.Stork || {};
+
+    (function() {
+        Stork.foo = Stork.foo || [];
+        Stork.foo.push('bar');
+
+        var script = document.createElement('script'); 
+
+        script.type  = 'text/javascript';
+        script.async = true;
+        script.src   = '/static/examples/02/passing-args/globals.js';
+
+        var entry = document.getElementsByTagName('script')[0];
+        entry.parentNode.insertBefore(script, entry);
+    }());
+    </script>
+
+    <hr/>
+
+    <p>Tested in Chrome 13, Safari 5, Firefox 5, IE 7+, Opera 11.</p>
+{% endblock %}

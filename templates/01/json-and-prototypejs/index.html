@@ -1,0 +1,25 @@
+{% extends 'example.html' %}
+
+{% block content %}
+
+    <h1>Native JSON and Prototype</h1>
+
+    <p>This example demonstrates how loading the Prototype.js library can cause incompatible code changes, even on native/default objects like JSON.stringify.</p>
+
+    <h2>On an unmodified page</h2>
+    <pre><code>JSON.stringify([1, 2, undefined]);</code></pre>
+
+    <script>
+        document.write('<pre><code>=> ' + JSON.stringify([1, 2, undefined]) + '</code></pre>');
+    </script>
+    
+    <hr/>
+
+    <h2>After loading Protoype.js</h2>
+    <script src="/static/prototype.js"></script>
+
+    <pre><code>JSON.stringify([1, 2, undefined]);</code></pre>
+    <script>
+        document.write('<pre><code>=>' + JSON.stringify([1, 2, undefined]) + '</code></pre>');
+    </script>
+{% endblock %}
