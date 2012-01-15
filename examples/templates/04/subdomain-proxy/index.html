@@ -27,7 +27,7 @@
                 function onready() {
                     iframe.contentWindow.jQuery.ajax({
                         method: 'GET',
-                        url: 'products.php',
+                        url: 'products.json',
                         data: { product: id },
                         success: function(resp) {
                             document.getElementById('output').innerHTML = resp;

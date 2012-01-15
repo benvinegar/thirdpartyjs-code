@@ -28,6 +28,8 @@ def example(chapter=None, name=None, file=None):
         ext = string.split(file, '.')[-1]
         if ext == 'js' or ext == 'jsonp':
             response.headers['Content-type'] = 'application/javascript'
+        if ext == 'json':
+            response.headers['Content-type'] = 'application/json'
         elif ext == 'css':
             response.headers['Content-type'] = 'text/css'
     except Exception:

@@ -1,7 +1,7 @@
 {% extends 'example.html' %}
 
 {% block content %}
-    <script src="/static/json2.js"></script>
+    <script src="{{ url_for('static', filename='json2.js') }}"></script>
 
 	<h1>JSONP Example</h1>
 
@@ -18,7 +18,7 @@
 	
 	script.type = 'text/javascript';
 	script.async = true;
-	script.src = 'endpoint.jsonp?callback=jsonpCallback';
+	script.src = '/echo.jsonp?callback=jsonpCallback&foo=bar';
 
 	document.body.appendChild(script);
 	</script>

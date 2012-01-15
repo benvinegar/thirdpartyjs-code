@@ -6,9 +6,9 @@
     <h2>Blocking example</h2>
     <p>Below this line of text is a standard &lt;script&gt; include that loads a slow-loading JavaScript file. Below that script include is further page content, but it will not appear until the script has finished loading (3 seconds).</p>
     
-    <img src="/static/loading.gif"/>
+    <img src="{{ url_for('static', filename='loading.gif') }}"/>
     
-    <script src="slow.js"></script>
+    <script src="/slow?url={{ url_for('example', chapter='02', name='script-blocking', file='removeSpinner.js') }}"></script>
     <p>This part of the document won't render until the script is loaded.</p>
     
     <hr/>
@@ -16,7 +16,7 @@
     <h2>Async example</h2>
     <p>Now we load the same slow-loading file <em>asynchronously</em> by dynamically creating a &lt;script&gt; element and appending it to the DOM.
     
-    <p><img src="/static/loading.gif"/></p>
+    <p><img src="{{ url_for('static', filename='loading.gif') }}"/></p>
     <script>
     (function() {
         var script = document.createElement('script');
@@ -27,7 +27,7 @@
         // Append a timestamp to the script URL so that the browser
         // treats this as a separate file (doesn't cache the response from
         // earlier).
-        script.src   = 'slow.js?' + (new Date()).getTime();
+        script.src   = "/slow?url={{ url_for('example', chapter='02', name='script-blocking', file='removeSpinner.js') }}&" + (new Date()).getTime();
 
         var entry = document.getElementsByTagName('script')[0];
         entry.parentNode.insertBefore(script, entry);

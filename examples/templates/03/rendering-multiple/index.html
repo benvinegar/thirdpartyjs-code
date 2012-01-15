@@ -3,7 +3,7 @@
 {% block head %}
     {{ super() }}
     
-    <script src="/static/jquery.js"></script>
+    <script src="{{ url_for('static', filename='jquery.js') }}"></script>
 {% endblock %}
 
 {% block content %}
