@@ -1,0 +1,13 @@
+{% extends 'example.html' %}
+
+{% block content %}
+
+    <h3>Versioning<h3/>
+
+    <script src="sdk.js"></script>
+    <script>
+        Stork.init('1.0', function(S) {
+           debugger; 
+        });
+    </script>
+{% endblock %}
