@@ -35,6 +35,6 @@ def example(chapter=None, name=None, file=None):
 
     return response
 
-@app.route("/")
+@app.route("/index.html")
 def index():
     return render_template('index.html')

@@ -16,7 +16,7 @@
     <hr/>
 
     <h2>After loading Protoype.js</h2>
-    <script src="/static/prototype.js"></script>
+    <script src="{{ url_for('static', filename='prototype.js') }}"></script>
 
     <pre><code>JSON.stringify([1, 2, undefined]);</code></pre>
     <script>
