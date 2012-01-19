@@ -40,7 +40,7 @@
 	    return params;
 	};
 
-	var url  = getScriptUrl(/^fragment\.js/);
+	var url  = getScriptUrl(/\/fragment\.js/);
 
 	var params = getQueryParameters(url.replace(/^.*\#/, ''));
 

@@ -1,3 +1,7 @@
+{% extends 'example.html' %}
+
+{% block content %}
+
 <!DOCTYPE html>
 
 <html>
@@ -15,11 +19,11 @@
         var bd = document.getElementsByTagName('body')[0];
 
         el.style.display = 'none';
-        el.src = 'http://localhost:9999/server.html';
+        el.src = "{{ service_url_for('example', chapter='05', name='postmessage', file='server.html') }}";
         bd.appendChild(el);
 
         window.addEventListener('message', function (ev) {
-          if (ev.origin != 'http://localhost:9999')
+          if (ev.origin != '{{ service_url }}')
             return;
 
           log("Incoming: " + ev.data);
@@ -33,3 +37,5 @@
     <pre id="log"></pre>
   </body>
 </html>
+
+{% endblock %}

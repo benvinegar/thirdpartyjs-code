@@ -5,7 +5,7 @@
     <script>
       function init() {
         window.name = 'Hello, World!';
-        window.location = 'http://localhost:9998/empty.html';
+        window.location = "{{ publisher_url_for('example', chapter='05', name='name-transport', file='empty.html') }}";
       }
     </script>
   </head>

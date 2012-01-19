@@ -7,5 +7,5 @@
         web page using a standard script include.
     </p>
     
-    <script src="widget.js"></script>
+    <script src="{{ service_url_for('example', chapter='01', name='weather-widget', file='widget.js') }}"></script>
 {% endblock %}

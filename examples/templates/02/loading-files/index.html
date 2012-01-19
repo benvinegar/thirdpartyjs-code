@@ -79,14 +79,14 @@
     }
 
     log('Loading lib.js');
-    loadScript('lib.js', function() {
+    loadScript("{{ service_url_for('example', chapter='02', name='loading-files', file='lib.js') }}", function() {
         log('&hellip; Callback fired');
 
         // I've chosen to load these sequentially to improve
         // the presentation of the example HTML file. But really,
         // you should load these sequentially.
         log('Loading styles.css');
-        loadStylesheet('styles.css', function() {
+        loadStylesheet("{{ service_url_for('example', chapter='02', name='loading-files', file='styles.css') }}", function() {
             log('&hellip; Callback fired');
         });
     });

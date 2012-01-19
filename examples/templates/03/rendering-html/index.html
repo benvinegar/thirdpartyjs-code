@@ -5,7 +5,7 @@
 
     <h2>document.write</h2>
 
-    <script src="docwrite.js"></script>
+    <script src="{{ service_url_for('example', chapter='03', name='rendering-html', file='docwrite.js') }}"></script>
 
     <h2>Appended</h2>
     <script id="stork-widget">
@@ -13,7 +13,7 @@
             var script = document.createElement('script');
             script.type = 'text/javascript';
             script.async = true;
-            script.src = 'append.js?product=1234'
+            script.src = "{{ service_url_for('example', chapter='03', name='rendering-html', file='append.js') }}?product=1234";
             
             var entry = document.getElementsByTagName('script')[0];
             entry.parentNode.insertBefore(script, entry);

@@ -40,8 +40,7 @@
 	    return params;
 	};
 
-	var url  = getScriptUrl(/^querystring\.js/);
-
+	var url  = getScriptUrl(/\/querystring\.js/);
 	var params = getQueryParameters(url.replace(/^.*\?/, ''));
 
 	document.getElementById('query-string-out').innerHTML = JSON.stringify(params);

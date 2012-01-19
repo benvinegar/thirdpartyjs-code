@@ -1,3 +1,7 @@
+{% extends 'example.html' %}
+
+{% block content %}
+
 <!DOCTYPE html>
 
 <html>
@@ -13,10 +17,10 @@
 
         var el = document.createElement('iframe');
         var bd = document.getElementsByTagName('body')[0];
-        var url = 'http://localhost:9998/client.html';
+        var url = window.location.href;
 
         el.style.display = 'none';
-        el.src = 'http://localhost:9999/server.html?' + encodeURIComponent(url);
+        el.src = "{{ service_url_for('example', chapter='05', name='hash-transport', file='server.html') }}?" + encodeURIComponent(url);
         bd.appendChild(el);
 
         var listener = function () {
@@ -40,3 +44,5 @@
     <pre id="log"></pre>
   </body>
 </html>
+
+{% endblock %}

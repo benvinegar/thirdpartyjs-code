@@ -18,7 +18,7 @@
 	
 	script.type = 'text/javascript';
 	script.async = true;
-	script.src = '/echo.jsonp?callback=jsonpCallback&foo=bar';
+	script.src = '{{ service_url }}/echo.jsonp?callback=jsonpCallback&foo=bar';
 
 	document.body.appendChild(script);
 	</script>

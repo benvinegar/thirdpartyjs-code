@@ -3,7 +3,7 @@
 {% block head %}
     {{ super() }}
 
-    <script src="/static/common/json2.js"></script>
+    <script src="{{ url_for('static', filename='json2.js') }}"></script>
     <style>
         .result { width: 200px; background-color: #8f8;}
     </style>
@@ -26,7 +26,7 @@
 
         script.type  = 'text/javascript';
         script.async = true;
-        script.src   = 'querystring.js?foo=bar';
+        script.src   = "{{ service_url_for('example', chapter='02', name='passing-args', file='querystring.js') }}?foo=bar";
 
         var entry = document.getElementsByTagName('script')[0];
         entry.parentNode.insertBefore(script, entry);
@@ -46,7 +46,7 @@
 
         script.type  = 'text/javascript';
         script.async = true;
-        script.src   = 'fragment.js#foo=bar';
+        script.src   = "{{ service_url_for('example', chapter='02', name='passing-args', file='fragment.js') }}#foo=bar";
 
         var entry = document.getElementsByTagName('script')[0];
         entry.parentNode.insertBefore(script, entry);
@@ -72,7 +72,7 @@ Stork.foo.push('bar');</code></pre>
 
         script.type  = 'text/javascript';
         script.async = true;
-        script.src   = 'globals.js';
+        script.src   = "{{ service_url_for('example', chapter='02', name='passing-args', file='globals.js') }}";
 
         var entry = document.getElementsByTagName('script')[0];
         entry.parentNode.insertBefore(script, entry);
