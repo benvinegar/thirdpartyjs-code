@@ -15,7 +15,7 @@
                 function openLoginWindow(e) {
                     e.preventDefault();
 
-                    popup = window.open('login.php', '_blank', 'width=460,height=225');
+                    popup = window.open("{{ service_url_for('example', chapter='06', name='auth-new-window', file='auth.html') }}", '_blank', 'width=460,height=225');
                 }
 
                 var login = document.getElementById('login');
