@@ -1,3 +1,7 @@
+{% extends 'example.html' %}
+
+{% block content %}
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,3 +26,5 @@
         <iframe src="{{ service_url_for('example', chapter='06', name='auth-new-window', file='iframe.html' )}}"/>
     </body>
 </html>
+
+{% endblock %}
