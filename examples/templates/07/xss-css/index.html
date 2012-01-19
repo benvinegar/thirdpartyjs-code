@@ -1,0 +1,25 @@
+{% extends 'example.html' %}
+
+{% block content %}
+
+<!DOCTYPE html>
+
+<html>
+    <body>
+        <script>
+            // Supposed to be color like #000 but attackers use it to inject their code into an
+            // iframe.
+            var color = "#000;x:expression(alert('Hello, World!'))";
+            var iframe1 = document.createElement('iframe');
+
+            iframe1.src = 'iframe-vulnerable.html?color=' + encodeURIComponent(color);
+            document.body.appendChild(iframe1);
+
+            var iframe2 = document.createElement('iframe');
+            iframe2.src = 'iframe-safe.html?color=' + encodeURIComponent(color);
+            document.body.appendChild(iframe2);
+        </script>
+    </body>
+</html>
+
+{% endblock %}
