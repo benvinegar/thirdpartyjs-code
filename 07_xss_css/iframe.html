@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+
+<html>
+    <body>
+        <script>
+            var color = decodeURIComponent(document.location.search.replace('?color=', ''));
+
+            document.body.innerHTML = '<style type="text/css">' +
+                'body { color: ' + color + '; }' +
+                '</style>';
+        </script>
+    </body>
+</html>
