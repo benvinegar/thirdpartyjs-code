@@ -1,41 +1,32 @@
 {% extends 'example.html' %}
 
 {% block content %}
-
-<!DOCTYPE html>
-
-<html>
-  <head>
     <script>
-      function log(msg) {
-        var el = document.getElementById('log');
-        el.innerHTML += '<br>' + msg;
-      }
+        function log(msg) {
+            var el = document.getElementById('log');
+            el.innerHTML += '<br>' + msg;
+        }
+  
+        function start() {
+            log('Creating iframe');
 
-      function start() {
-        log('Creating iframe');
+            var el = document.createElement('iframe');
+            var bd = document.getElementsByTagName('body')[0];
 
-        var el = document.createElement('iframe');
-        var bd = document.getElementsByTagName('body')[0];
+            el.style.display = 'none';
+            el.src = "{{ service_url_for('example', chapter='05', name='postmessage', file='server.html') }}";
+            bd.appendChild(el);
 
-        el.style.display = 'none';
-        el.src = "{{ service_url_for('example', chapter='05', name='postmessage', file='server.html') }}";
-        bd.appendChild(el);
+            window.addEventListener('message', function (ev) {
+                if (ev.origin != '{{ service_url }}')
+                    return;
 
-        window.addEventListener('message', function (ev) {
-          if (ev.origin != '{{ service_url }}')
-            return;
-
-          log("Incoming: " + ev.data);
-        });
-      }
+                log("Incoming: " + ev.data);
+            });
+        }
     </script>
-  </head>
-
-  <body>
+    
     <button onclick="start()">Start</button>
     <pre id="log"></pre>
-  </body>
-</html>
 
 {% endblock %}

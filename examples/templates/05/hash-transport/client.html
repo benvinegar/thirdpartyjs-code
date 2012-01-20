@@ -2,47 +2,39 @@
 
 {% block content %}
 
-<!DOCTYPE html>
-
-<html>
-  <head>
     <script>
-      function log(msg) {
-        var el = document.getElementById('log');
-        el.innerHTML += '<br>' + msg;
-      }
+        function log(msg) {
+            var el = document.getElementById('log');
+            el.innerHTML += '<br>' + msg;
+        }
 
-      function start() {
-        log('Creating iframe');
+        function start() {
+            log('Creating iframe');
 
-        var el = document.createElement('iframe');
-        var bd = document.getElementsByTagName('body')[0];
-        var url = window.location.href;
+            var el = document.createElement('iframe');
+            var bd = document.getElementsByTagName('body')[0];
+            var url = window.location.href;
 
-        el.style.display = 'none';
-        el.src = "{{ service_url_for('example', chapter='05', name='hash-transport', file='server.html') }}?" + encodeURIComponent(url);
-        bd.appendChild(el);
+            el.style.display = 'none';
+            el.src = "{{ service_url_for('example', chapter='05', name='hash-transport', file='server.html') }}?" + encodeURIComponent(url);
+            bd.appendChild(el);
 
-        var listener = function () {
-          var hash = location.hash;
+            var listener = function () {
+                var hash = location.hash;
 
-          if (hash && hash != '#') {
-            log("Incoming: " + hash.replace('#', ''));
-            window.location.href = url + '#';
-          }
+                if (hash && hash != '#') {
+                    log("Incoming: " + hash.replace('#', ''));
+                    window.location.href = url + '#';
+                }
 
-          setTimeout(listener, 100);
-        };
+                setTimeout(listener, 100);
+            };
 
         listener();
-      }
+    }
     </script>
-  </head>
 
-  <body>
     <button onclick="start()">Start</button>
     <pre id="log"></pre>
-  </body>
-</html>
 
 {% endblock %}
