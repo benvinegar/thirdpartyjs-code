@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<script>
-		// This file *should* set document.domain to the publisher's domain,
-		// but for the demo to run off an unconfigured localhost, we've left
-		// this out.
-
-		//document.domain = 'publisher.com';
+		document.domain = '{{ publisher_domain }}';
 	</script>
 	<script src="{{ url_for('static', filename='jquery.js') }}"></script>
 </html>

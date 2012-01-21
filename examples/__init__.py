@@ -11,7 +11,10 @@ app.config.update(
     FREEZER_IGNORE_MIMETYPE_WARNINGS=True
 )
 
+PUBLISHER_DOMAIN = 'publisher.dev'
+
 PUBLISHER_URL = 'http://publisher.dev:5000'
+PUBLISHER_PROXY_URL = 'http://proxy.publisher.dev:5000'
 SERVICE_URL = 'http://widget.dev:5000'
 
 
@@ -57,6 +60,10 @@ def publisher_url_for(*args, **kwargs):
     return PUBLISHER_URL + url_for(*args, **kwargs)
 
 
+def publisher_proxy_url_for(*args, **kwargs):
+    return PUBLISHER_PROXY_URL + url_for(*args, **kwargs)
+
+
 def service_url_for(*args, **kwargs):
     return SERVICE_URL + url_for(*args, **kwargs)
 
@@ -65,9 +72,14 @@ def service_url_for(*args, **kwargs):
 def inject_url_helpers():
     return {
         'publisher_url_for': publisher_url_for,
+        'publisher_proxy_url_for': publisher_proxy_url_for,
         'service_url_for': service_url_for,
+
         'publisher_url': PUBLISHER_URL,
-        'service_url': SERVICE_URL
+        'publisher_proxy_url': PUBLISHER_PROXY_URL,
+        'service_url': SERVICE_URL,
+
+        'publisher_domain': PUBLISHER_DOMAIN
     }
 
 

@@ -22,7 +22,9 @@ Build the source code examples:
 
 Add the following entries to your hosts file (```/etc/hosts``` on OS X, Linux):
 
-```publisher.dev 127.0.0.1
+```sh
+publisher.dev 127.0.0.1
+proxy.publisher.dev 127.0.0.1
 widget.dev 127.0.0.1
 ```
 

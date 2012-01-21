@@ -2,10 +2,7 @@
 
 {% block header %}
     <script>
-        // Can't use this right now because we're using port 5000,
-        // and changing document.domain resets the port value to 80
-        // re: the document's origin.
-        //document.domain = 'publisher.dev';
+        document.domain = '{{ publisher_domain }}';
     </script>
 {% endblock %}
 
@@ -22,7 +19,7 @@
     <script>
         function getProductData(id) {
             var iframe = document.createElement('iframe');
-            iframe.src = "{{ publisher_url_for('example', chapter='04', name='subdomain-proxy', file='proxy.html') }}";
+            iframe.src = "{{ publisher_proxy_url_for('example', chapter='04', name='subdomain-proxy', file='proxy.html') }}";
          
             function onready() {
                 iframe.contentWindow.jQuery.ajax({
