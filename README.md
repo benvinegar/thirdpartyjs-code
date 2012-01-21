@@ -20,12 +20,12 @@ You'll need both Python and its packaging library, setuptools, in order to build
 
 ```$ python freeze.py```
 
-3) Add the following entries to your hosts file (```/etc/hosts``` on OS X, Linux):
+3) Add the following entries to your <a href="http://en.wikipedia.org/wiki/Hosts_(file)#Location_in_the_file_system">hosts</a> file:
 
-```sh
-publisher.dev 127.0.0.1
+```
+publisher.dev       127.0.0.1
 proxy.publisher.dev 127.0.0.1
-widget.dev 127.0.0.1
+widget.dev          127.0.0.1
 ```
 
 4) Run the embedded server:
