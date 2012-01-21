@@ -1,10 +1,16 @@
 {% extends 'example.html' %}
 
 {% block content %}
+    <div class="page-header">
+        <h1>Hash Transport Example</h1>
+    </div>
+
+    <p>This example communicates with an iframe hosted on a remote domain using the browser url's document fragment (hash).
 
     <script>
         function log(msg) {
             var el = document.getElementById('log');
+            el.style.display = 'block';
             el.innerHTML += '<br>' + msg;
         }
 
@@ -34,7 +40,12 @@
     }
     </script>
 
-    <button onclick="start()">Start</button>
-    <pre id="log"></pre>
+    <div>
+        <button class="btn"onclick="start()">Start</button>
+    </div>
+
+    <div>
+        <pre id="log" style="display:none"></pre>
+    </div>
 
 {% endblock %}

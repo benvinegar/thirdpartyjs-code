@@ -3,12 +3,20 @@
     <head>
         {% block head %}
         <title>Third-party JavaScript</title>
+        <link href="{{ url_for('static', filename='css/bootstrap.css') }}" rel="stylesheet" type="text/css"/>
+        <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet" type="text/css"/>
         {% endblock %}
     </head>
 
     <body>
-        {% block header %}{% endblock %}
+        <div class="container">
+            {% block header %}{% endblock %}
 
-        {% block content %}{% endblock %}
+            {% block content %}{% endblock %}
+
+            <div class="footer">
+                <a href="http://thirdpartyjs.com">Third-party JavaScript</a> is written by Ben Vinegar and Anton Kovalyov. Available via <a href="http://manning.com/vinegar">Manning Publishing</a>.
+            </div>
+        </div>
     </body>
 </html>

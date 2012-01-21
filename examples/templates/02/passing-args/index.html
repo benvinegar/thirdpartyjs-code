@@ -10,11 +10,14 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Passing script arguments</h1>
+
+    <div class="page-header">
+        <h1>Passing script arguments</h1>
+    </div>
 
     <p>This example demonstrates a third-party script capturing publisher-defined parameters. Three (3) methods are used: using the query string, fragment identifier (#), and global variable arrays.</p>
 
-    <h2>Query string</h2>
+    <h3>Query string</h3>
 
     <code>querystring.js?foo=bar</code>
 
@@ -34,7 +37,7 @@
     </script>
 
 
-    <h2>Fragment identifier (#)</h2>
+    <h3>Fragment identifier (#)</h3>
 
     <code>fragment.js#foo=bar</code>
 
@@ -53,7 +56,7 @@
     }());
     </script>
 
-    <h2>Global variable arrays</h2>
+    <h3>Global variable arrays</h3>
 
     <pre><code>Stork.foo = Stork.foo || [];
 Stork.foo.push('bar');</code></pre>

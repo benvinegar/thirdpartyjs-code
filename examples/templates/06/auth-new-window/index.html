@@ -1,17 +1,10 @@
 {% extends 'example.html' %}
 
-{% block header %}
-    <title>Setting Cookies in a New Window</title>
-    <style>
-        body {
-            width: 800px;
-        }
-    </style>
-{% endblock %}
-
 {% block content %}
 
-	<h1>Setting Cookies in a New Window</h1>
+    <div class="page-header">
+	   <h1>Setting Cookies in a New Window</h1>
+    </div>
 
     <p>
         This page is designed to simulate a publisher's website. The iframe hosts
@@ -20,7 +13,6 @@
         a new window, cookies can be set therein.
     </p>
 
-    <p><strong>Note</strong>: This example requires a web server capable of executing PHP (i.e. Apache).</p>
-    <iframe src="{{ service_url_for('example', chapter='06', name='auth-new-window', file='iframe.html' )}}"/>
+    <iframe src="{{ service_url_for('example', chapter='06', name='auth-new-window', file='iframe.html' )}}"></iframe>
 
 {% endblock %}

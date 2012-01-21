@@ -1,13 +1,15 @@
 {% extends 'example.html' %}
 
 {% block content %}
-    <h1>Outputting HTML</h1>
+    <div class="page-header">
+        <h1>Outputting HTML</h1>
+    </div>
 
-    <h2>document.write</h2>
+    <h3>document.write</h3>
 
     <script src="{{ service_url_for('example', chapter='03', name='rendering-html', file='docwrite.js') }}"></script>
 
-    <h2>Appended</h2>
+    <h3>Appended</h3>
     <script id="stork-widget">
         (function() {
             var script = document.createElement('script');

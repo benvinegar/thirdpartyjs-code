@@ -1,40 +1,19 @@
 {% extends 'example.html' %}
 
-{% block header %}
-    <title>Simple XSS attack</title>
-    <script src="./simple_xss.js"></script>
-    <style>
-        body {
-            font-family: Arial;
-            font-size: 10pt;
-        }
-
-        h4 {
-            font-weight: normal;
-            font-size: 120%;
-        }
-
-        textarea {
-            display: block;
-            width: 400px;
-            height: 100px;
-        }
-
-        button {
-            margin-top: 20px;
-        }
-    </style>
-{% endblock %}
-
 {% block content %}
+    
+    <div class="page-header">
+        <h1>Simple XSS Example</h1>
+    </div>
 
-    <body onload="load();">
-        <h4>Review:</h4>
-        <form action="display.php" method="POST">
-            <textarea name="review" id="review"></textarea>
-            <p>To see simple XSS vulnerability in action, just press
-                <button type="submit">Send</button></p>
-        </form>
-    </body>
+    <div id="review"></div>
+    
+    <script>
+        var div = document.createElement('div');
+        div.innerHTML = "This camera is great!";
+        div.innerHTML += "<scr" + "ipt>alert('Hello, World!');</scr" + "ipt>";
+
+        document.getElementById('review').appendChild(div);
+    </script>
 
 {% endblock %}

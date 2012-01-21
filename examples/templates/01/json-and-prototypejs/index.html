@@ -2,24 +2,26 @@
 
 {% block content %}
 
-    <h1>Native JSON and Prototype</h1>
+    <div class="page-header">
+        <h1>Native JSON and Prototype.js</h1>
+    </div>
 
-    <p>This example demonstrates how loading the Prototype.js library can cause incompatible code changes, even on native/default objects like JSON.stringify.</p>
+    <p>This example demonstrates how some versions of the <a href="http://www.prototypejs.org/">Prototype.js</a> library can cause incompatible code changes, even on native/default objects like JSON.stringify.</p>
 
-    <h2>On an unmodified page</h2>
-    <pre><code>JSON.stringify([1, 2, undefined]);</code></pre>
+    <h3>On an unmodified page</h3>
+
+    <p><code>JSON.stringify([1, 2, undefined])</code> produces the following output:
 
     <script>
-        document.write('<pre><code>=> ' + JSON.stringify([1, 2, undefined]) + '</code></pre>');
+        document.write('<pre>' + JSON.stringify([1, 2, undefined]) + '</pre>');
     </script>
     
-    <hr/>
-
-    <h2>After loading Protoype.js</h2>
+    <h3>After loading Protoype.js</h3>
     <script src="{{ url_for('static', filename='prototype.js') }}"></script>
 
-    <pre><code>JSON.stringify([1, 2, undefined]);</code></pre>
+    <p><code>JSON.stringify([1, 2, undefined])</code> produces the following output:</p>
+
     <script>
-        document.write('<pre><code>=>' + JSON.stringify([1, 2, undefined]) + '</code></pre>');
+        document.write('<pre>' + JSON.stringify([1, 2, undefined]) + '</pre>');
     </script>
 {% endblock %}

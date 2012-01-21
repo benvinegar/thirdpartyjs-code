@@ -1,9 +1,11 @@
 {% extends 'example.html' %}
 
 {% block content %}
-    <h1>Blocking/async script includes</h1>
+    <div class="page-header">
+        <h1>Blocking/async script includes</h1>
+    </div>
     
-    <h2>Blocking example</h2>
+    <h3>Blocking example</h3>
     <p>Below this line of text is a standard &lt;script&gt; include that loads a slow-loading JavaScript file. Below that script include is further page content, but it will not appear until the script has finished loading (3 seconds).</p>
     
     <img src="{{ url_for('static', filename='loading.gif') }}"/>
@@ -13,7 +15,7 @@
     
     <hr/>
     
-    <h2>Async example</h2>
+    <h3>Async example</h3>
     <p>Now we load the same slow-loading file <em>asynchronously</em> by dynamically creating a &lt;script&gt; element and appending it to the DOM.
     
     <p><img src="{{ url_for('static', filename='loading.gif') }}"/></p>

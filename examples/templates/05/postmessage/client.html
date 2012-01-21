@@ -1,9 +1,16 @@
 {% extends 'example.html' %}
 
 {% block content %}
+    <div class="page-header">
+        <h1>window.postMessage Example</h1>
+    </div>
+
+    <p>This example communicates with an iframe hosted on a remote domain using the <code>window.postMessage</code> HTML5 API.
+
     <script>
         function log(msg) {
             var el = document.getElementById('log');
+            el.style.display = 'block';
             el.innerHTML += '<br>' + msg;
         }
   
@@ -26,7 +33,12 @@
         }
     </script>
     
-    <button onclick="start()">Start</button>
-    <pre id="log"></pre>
+    <div>
+        <button class="btn" onclick="start()">Start Example</button>
+    </div>
+    
+    <div>
+        <pre id="log" style="display:none"></pre>
+    </div>
 
 {% endblock %}
