@@ -10,17 +10,17 @@ Feedback and comments are welcome.
 
 ## Install instructions
 
-Install Python (already pre-installed on OS X).
+You'll need both Python and its packaging library, setuptools, in order to build and serve the example code. On OS X, these come pre-installed. On Windows? See <a href="#windows">Windows Instructions</a> first.
 
-Install the Frozen-Flask Python package.
+1) Install the Frozen-Flask Python package.
 
 ```$ easy_install Frozen-Flask```
 
-Build the source code examples:
+2) Build the source code examples:
 
 ```$ python freeze.py```
 
-Add the following entries to your hosts file (```/etc/hosts``` on OS X, Linux):
+3) Add the following entries to your hosts file (```/etc/hosts``` on OS X, Linux):
 
 ```sh
 publisher.dev 127.0.0.1
@@ -28,11 +28,23 @@ proxy.publisher.dev 127.0.0.1
 widget.dev 127.0.0.1
 ```
 
-Run the embedded server:
+4) Run the embedded server:
 
 ```$ python server.py```
 
 Once the server is running, access the examples through http://publisher.dev/examples/index.html.
+
+<a name="windows"/>
+
+## Installing Python on Windows
+
+Download and install Python 2.7.x from the <a href="http://python.org/getit/">Python download page</a>.
+
+Next, setuptools. Download and run the 2.7.x installer from: http://pypi.python.org/pypi/setuptools#downloads
+
+Afterwards, you'll need to add both the Python directory (C:\Python27) and the scripts directory (C:\Python27\Scripts) to your PATH. To do this, go to My Computer ‣ Properties ‣ Advanced ‣ Environment Variables.
+
+You should now be able to run the 'python' and 'easy_install' executables from the Windows shell. Success!
 
 ## Need help?
 
