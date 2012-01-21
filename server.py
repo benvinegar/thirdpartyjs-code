@@ -1,7 +1,7 @@
 import time
 import flask
 import json
-from flask import Flask, render_template, make_response, request
+from flask import Flask, make_response, request
 
 app = Flask(__name__, static_url_path='/examples', static_folder='build')
 
@@ -21,6 +21,15 @@ def jsonp():
     Returns the passed query string args via JSONP.
     """
     return "%s(%s)" % (request.args.get('callback'), json.dumps(request.args))
+
+
+@app.route('/cors')
+def cors():
+    r = make_response(json.dumps(request.args))
+
+    # Must match requesting Origin or *
+    r.headers['Access-Control-Allow-Origin'] = '*'
+    return r
 
 
 @app.route('/login',  methods=['POST'])
