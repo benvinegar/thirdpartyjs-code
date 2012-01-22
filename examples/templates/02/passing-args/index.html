@@ -4,9 +4,6 @@
     {{ super() }}
 
     <script src="{{ url_for('static', filename='json2.js') }}"></script>
-    <style>
-        .result { width: 200px; background-color: #8f8;}
-    </style>
 {% endblock %}
 
 {% block content %}
@@ -15,13 +12,16 @@
         <h1>Passing script arguments</h1>
     </div>
 
-    <p>This example demonstrates a third-party script capturing publisher-defined parameters. Three (3) methods are used: using the query string, fragment identifier (#), and global variable arrays.</p>
+    <p>This example demonstrates a third-party script capturing publisher-defined parameters. 
+    Four techniques are used: using the query string, fragment identifier (#), HTML5 data-* attributes, and global variable arrays.</p>
 
     <h3>Query string</h3>
 
-    <code>querystring.js?foo=bar</code>
+    <p>
+        <code>querystring.js?productId=1337</code>
+    </p>
 
-    <pre><code class="result" id="query-string-out"></code></pre>
+    <pre id="query-string-out"></pre>
 
     <script>
     (function() {
@@ -29,7 +29,7 @@
 
         script.type  = 'text/javascript';
         script.async = true;
-        script.src   = "{{ service_url_for('example', chapter='02', name='passing-args', file='querystring.js') }}?foo=bar";
+        script.src   = "{{ service_url_for('example', chapter='02', name='passing-args', file='querystring.js') }}?productId=1337";
 
         var entry = document.getElementsByTagName('script')[0];
         entry.parentNode.insertBefore(script, entry);
@@ -39,9 +39,11 @@
 
     <h3>Fragment identifier (#)</h3>
 
-    <code>fragment.js#foo=bar</code>
+    <p>
+        <code>fragment.js#productId=1337</code>
+    </p>
 
-    <pre><code class="result" id="fragment-ident-out"></code></pre>
+    <pre id="fragment-ident-out"></pre>
 
     <script>
     (function() {
@@ -49,7 +51,29 @@
 
         script.type  = 'text/javascript';
         script.async = true;
-        script.src   = "{{ service_url_for('example', chapter='02', name='passing-args', file='fragment.js') }}#foo=bar";
+        script.src   = "{{ service_url_for('example', chapter='02', name='passing-args', file='fragment.js') }}#productId=1337";
+
+        var entry = document.getElementsByTagName('script')[0];
+        entry.parentNode.insertBefore(script, entry);
+    }());
+    </script>
+
+    <h3>data-* attributes</h3>
+
+    <p>
+        <code>data-stork-productId="1337"</code>
+    </p>
+
+
+    <pre id="data-attr-out"></pre>
+
+    <script data-stork-productId="1337">
+    (function() {
+        var script = document.createElement('script'); 
+
+        script.type  = 'text/javascript';
+        script.async = true;
+        script.src   = "{{ service_url_for('example', chapter='02', name='passing-args', file='data-attr.js') }}";
 
         var entry = document.getElementsByTagName('script')[0];
         entry.parentNode.insertBefore(script, entry);
@@ -58,18 +82,20 @@
 
     <h3>Global variable arrays</h3>
 
-    <pre><code>Stork.foo = Stork.foo || [];
-Stork.foo.push('bar');</code></pre>
+    <p>
+        <code>Stork.productId = Stork.productId || [];</code><br/>
+        <code>Stork.productId.push(1337);</code>
+    </p>
 
-    <pre><code class="result" id="global-var-out"></code></pre>
+    <pre id="global-var-out"></pre>
 
 
     <script>
     var Stork = window.Stork || {};
 
     (function() {
-        Stork.foo = Stork.foo || [];
-        Stork.foo.push('bar');
+        Stork.productId = Stork.productId || [];
+        Stork.productId.push(1337);
 
         var script = document.createElement('script'); 
 
@@ -81,8 +107,4 @@ Stork.foo.push('bar');</code></pre>
         entry.parentNode.insertBefore(script, entry);
     }());
     </script>
-
-    <hr/>
-
-    <p>Tested in Chrome 13, Safari 5, Firefox 5, IE 7+, Opera 11.</p>
 {% endblock %}
