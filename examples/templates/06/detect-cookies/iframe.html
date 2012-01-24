@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+        function testCanWriteCookies() {
+            document.cookie = 'test=1';
+            var allCookies = document.cookie.replace(' ', '').split(';');
+            for (var i = 0; i < allCookies.length; i++) {
+                if (allCookies[i].indexOf('test=1') !== -1)
+                    return true;
+            }
+            return false;
+        }
+        window.parent.postMessage(testCanWriteCookies(), '{{ publisher_url }}');
+        </script>
+    </head>
+</html>

@@ -1,0 +1,37 @@
+{% extends 'example.html' %}
+
+{% block content %}
+    
+    <div class="page-header">
+        <h1>Detecting Third-party Cookies</h1>
+    </div>
+
+    <p>This example detects whether third-party cookies are enabled or disabled by attempting to create a cookie inside an iframe hosted on a remote domain.</p>
+
+    <div id="disabled" class="alert-message error" style="display:none">
+        Third-party cookies are <strong>disabled</strong>
+    </div>
+
+    <div id="enabled" class="alert-message success" style="display:none">
+        Third-party cookies are enabled
+    </div>
+
+    <h3>Having trouble?</h3>
+    
+    <p>Try restarting your browser when changing your third-party cookie settings. Also, try clearing your cookies for the test domain: {{ service_url }}.</p>
+    
+    <script>
+    (function() {
+        var iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        iframe.src = "{{ service_url_for('example', chapter='06', name='detect-cookies', file='iframe.html') }}";
+        document.body.appendChild(iframe);
+
+        window.onmessage = function(e) {
+            var id = e.data ? 'enabled' : 'disabled';
+            document.getElementById(id).style.display = 'block';
+        }
+    })();
+    </script>
+
+{% endblock %}
