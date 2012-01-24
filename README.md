@@ -23,9 +23,9 @@ You'll need both Python and its packaging library, setuptools, in order to build
 3) Add the following entries to your <a href="http://en.wikipedia.org/wiki/Hosts_(file)#Location_in_the_file_system">hosts</a> file:
 
 ```
-publisher.dev       127.0.0.1
-proxy.publisher.dev 127.0.0.1
-widget.dev          127.0.0.1
+127.0.0.1 publisher.dev
+127.0.0.1 proxy.publisher.dev
+127.0.0.1 widget.dev
 ```
 
 4) Run the embedded server:
