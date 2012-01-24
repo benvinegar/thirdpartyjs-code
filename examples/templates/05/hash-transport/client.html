@@ -11,41 +11,43 @@
         function log(msg) {
             var el = document.getElementById('log');
             el.style.display = 'block';
-            el.innerHTML += '<br>' + msg;
+            el.innerHTML += msg + '\n';
         }
 
         function start() {
             log('Creating iframe');
 
+            var url = window.location.href.replace(/#.*/, '');
+
             var el = document.createElement('iframe');
             var bd = document.getElementsByTagName('body')[0];
-            var url = window.location.href;
 
             el.style.display = 'none';
             el.src = "{{ service_url_for('example', chapter='05', name='hash-transport', file='server.html') }}?" + encodeURIComponent(url);
+            
             bd.appendChild(el);
 
             var listener = function () {
-                var hash = location.hash;
+                var hash = window.location.hash;
 
                 if (hash && hash != '#') {
-                    log("Incoming: " + hash.replace('#', ''));
+                    log("Incoming: " + decodeURIComponent(hash.replace('#', '')));
                     window.location.href = url + '#';
                 }
 
                 setTimeout(listener, 100);
             };
 
-        listener();
-    }
+            listener();
+        }
     </script>
 
     <div>
-        <button class="btn"onclick="start()">Start</button>
+        <button class="btn" onclick="start()">Start</button>
     </div>
 
-    <div>
+    <p>
         <pre id="log" style="display:none"></pre>
-    </div>
+    </p>
 
 {% endblock %}

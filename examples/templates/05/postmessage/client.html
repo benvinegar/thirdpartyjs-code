@@ -11,7 +11,7 @@
         function log(msg) {
             var el = document.getElementById('log');
             el.style.display = 'block';
-            el.innerHTML += '<br>' + msg;
+            el.innerHTML += msg + "\n";
         }
   
         function start() {
@@ -22,6 +22,7 @@
 
             el.style.display = 'none';
             el.src = "{{ service_url_for('example', chapter='05', name='postmessage', file='server.html') }}";
+
             bd.appendChild(el);
 
             window.addEventListener('message', function (ev) {
@@ -37,8 +38,8 @@
         <button class="btn" onclick="start()">Start Example</button>
     </div>
     
-    <div>
+    <p>
         <pre id="log" style="display:none"></pre>
-    </div>
+    </p>
 
 {% endblock %}

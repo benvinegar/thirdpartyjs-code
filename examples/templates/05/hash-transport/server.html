@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-
 <html>
-  <head>
-    <script>
-      function init() {
-        var url = window.location.href;
-        url = url.split('?')[1].replace('?', '');
-        window.parent.location = decodeURIComponent(url) + '#helloworld';
-      }
-    </script>
+    <head>
+        <script>
+        function init() {
+            // Extract parent document's href from query string.
+            var url = window.location.href;
+            url = url.split('?')[1].replace('?', '');
+    
+            // Send message to parent by setting parent location
+            window.parent.location = decodeURIComponent(url) + '#' 
+                + encodeURIComponent('Hello, world!');
+        }
+        </script>
   </head>
-
   <body onload="init()"></body>
 </html>

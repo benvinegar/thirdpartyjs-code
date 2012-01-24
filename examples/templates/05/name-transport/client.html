@@ -11,7 +11,7 @@
         function log(msg) {
             var el = document.getElementById('log');
             el.style.display = 'block';
-            el.innerHTML += '<br>' + msg;
+            el.innerHTML += msg + "\n";
         }
 
         function start() {
@@ -19,19 +19,18 @@
 
             var el = document.createElement('iframe');
             var bd = document.getElementsByTagName('body')[0];
-
             el.style.display = 'none';
             el.src = "{{ service_url_for('example', chapter='05', name='name-transport', file='server.html') }}";
 
             var done = false;
             el.onreadystatechange = function () {
+                console.log(el.readyState);
                 if (!el.readyState == 'complete' || done)
                     return;
 
-                log('Listening');
                 var name = el.contentWindow.name;
                 if (name) {
-                    log('Data: ' + el.contentWindow.name);
+                    log('Incoming: ' + el.contentWindow.name);
                     done = true;
                 }
             };
@@ -44,8 +43,8 @@
         <button class="btn" onclick="start()">Start</button>
     </div>
 
-    <div>
+    <p>
         <pre id="log" style="display:none"></pre>
-    </div>
+    </p>
 
 {% endblock %}

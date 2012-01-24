@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-
 <html>
-  <head>
-    <script>
-      function init() {
-        window.parent.postMessage("Hello, World", "{{publisher_url}}");
-      }
-    </script>
-  </head>
+    <head>
+        <script>
+            function init() {
+                window.parent.postMessage("Hello, world!", "{{publisher_url}}");
+            }
+        </script>
+    </head>
 
-  <body onload="init()"></body>
+    <body onload="init()"></body>
 </html>

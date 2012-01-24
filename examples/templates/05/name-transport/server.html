@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-
 <html>
-  <head>
-    <script>
-      function init() {
-        window.name = 'Hello, World!';
-        window.location = "{{ publisher_url_for('example', chapter='05', name='name-transport', file='empty.html') }}";
-      }
-    </script>
-  </head>
-
-  <body onload="init();"></body>
+    <head>
+        <script>
+            function init() {
+                window.name = "Hello, world!";
+                window.location = "{{ publisher_url_for('example', chapter='05', name='name-transport', file='empty.html') }}";
+            }
+        </script>
+    </head>
+  
+    <body onload="init();"></body>
 </html>
