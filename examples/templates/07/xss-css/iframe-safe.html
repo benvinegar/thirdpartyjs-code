@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-
 <html>
     <body>
+        This text is not blue, because the style value was rejected
         <script>
             var color = decodeURIComponent(document.location.search.replace('?color=', ''));
+
+            // By assigning the value to the 'color' style property, any 
+            // non-valid CSS rules are rejected.
             document.body.style.color = color;
         </script>
     </body>

@@ -6,24 +6,30 @@
         <h1>XSS Vulnerability via CSS Example</h1>
     </div>
 
-    <p>This page adds two iframe elements to the page, and passes custom CSS rules to those iframes using the query string.</p>
+    <p>This page passes a publisher-defined CSS rule to two iframes via the query string. The rub: this rule contains an XSS exploit that affects certain versions of Internet Explorer.</p>
 
-    <div id="target"></div>
+    <p>
+        <code>#00f;x:expression(alert('Hello, World!'));</code>
+    </p>
+
+    <h3>Vulnerable</h3>
+    <div id="target1"></div>
+
+    <h3>Safe</h3>
+    <div id="target2"></div>
 
     <script>
-        var target = document.getElementById('target');
-
         // Supposed to be color like #000 but attackers use it to inject their code into an
         // iframe.
-        var color = "#000;x:expression(alert('Hello, World!'))";
+        var color = "#00f;x:expression(alert('Hello, World!'))";
         var iframe1 = document.createElement('iframe');
 
-        iframe1.src = 'iframe-vulnerable.html?color=' + encodeURIComponent(color);
-        target.appendChild(iframe1);
+        iframe1.src = 'iframe-vulnerable.html?color=' + encodeURIComponent(color) + '&' + (new Date()).getTime();
+        document.getElementById('target1').appendChild(iframe1);
 
         var iframe2 = document.createElement('iframe');
-        iframe2.src = 'iframe-safe.html?color=' + encodeURIComponent(color);
-        target.appendChild(iframe2);
+        iframe2.src = 'iframe-safe.html?color=' + encodeURIComponent(color)  + '&' + (new Date()).getTime();
+        document.getElementById('target2').appendChild(iframe2);
     </script>
 
 {% endblock %}

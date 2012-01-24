@@ -1,12 +1,17 @@
 <!DOCTYPE html>
-
 <html>
+    <head></head>
     <body>
+        This text is blue, but the script was injected
         <script>
             var color = decodeURIComponent(document.location.search.replace('?color=', ''));
 
-            document.body.innerHTML = '<style type="text/css">' +
-                'body { color: ' + color + '; }' +
+            // This iframe carelessly injects the passed value as plain text
+            // into a <style> tag. This can lead to certain vulnerabilities in
+            // some browsers.
+            document.head.innerHTML = 
+                '<style type="text/css">' +
+                '   body { color: ' + color + '; }' +
                 '</style>';
         </script>
     </body>
