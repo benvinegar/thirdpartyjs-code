@@ -32,7 +32,7 @@ You'll need both Python and its packaging library, setuptools, in order to build
 
 ```$ python server.py```
 
-Once the server is running, access the examples through http://publisher.dev/examples/index.html.
+Once the server is running, access the examples through http://publisher.dev:5000/examples/index.html.
 
 <a name="windows"/>
 
