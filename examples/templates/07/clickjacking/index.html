@@ -1,0 +1,43 @@
+{% extends 'example.html' %}
+
+{% block content %}
+    
+    <div class="page-header">
+        <h1>Clickjacking Example</h1>
+    </div>
+
+    <p>
+        In this example, a hidden iframe containing a button is made invisible and 
+        placed beneath the user's mouse cursor as they move around the page. If the 
+        user clicks, they will click the button inside the iframe, even though it is invisible.
+    </p>
+
+    <div id="target"></div>
+
+    <style>
+        #target iframe {
+            opacity: 0.3;
+            width: 80px;
+            height: 40px;
+            border: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+    </style>
+
+    <script>
+    (function() {
+        var iframe = document.createElement('iframe');
+        iframe.src = "{{ service_url_for('example', chapter='07', name='clickjacking', file='iframe.html') }}";
+
+        document.getElementById('target').appendChild(iframe);
+
+        window.onmousemove = function(e) {
+            iframe.style.top = (e.clientY - 20) + 'px';
+            iframe.style.left = (e.clientX - 40) + 'px';
+        }
+    })();
+    </script>
+
+{% endblock %}

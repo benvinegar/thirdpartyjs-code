@@ -25,7 +25,9 @@
         var iframe = document.createElement('iframe');
         iframe.style.display = 'none';
         iframe.src = "{{ service_url_for('example', chapter='06', name='detect-cookies', file='iframe.html') }}";
-        document.body.appendChild(iframe);
+        
+        var target = document.getElementsByTagName('script')[0];
+        target.parentNode.insertBefore(iframe, target);
 
         window.onmessage = function(e) {
             var id = e.data ? 'enabled' : 'disabled';

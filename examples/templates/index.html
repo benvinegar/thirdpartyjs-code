@@ -47,7 +47,8 @@
 
     <h3>Chapter 7</h3>
     <ul>
-        <li><a href="{{ url_for('example', chapter='07', name='simple-xss', file='index.html') }}">Simple XSS Example</a></li>
+        <li><a href="{{ url_for('example', chapter='07', name='simple-xss', file='index.html') }}">Cross-site Scripting (XSS)</a></li>
         <li><a href="{{ url_for('example', chapter='07', name='xss-css', file='index.html') }}">XSS via CSS</a></li>
+        <li><a href="{{ url_for('example', chapter='07', name='clickjacking', file='index.html') }}">Clickjacking (UI Redressing)</a></li>
     </ul>
 {% endblock %}
