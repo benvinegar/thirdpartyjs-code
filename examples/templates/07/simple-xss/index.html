@@ -6,14 +6,28 @@
         <h1>Simple XSS Example</h1>
     </div>
 
-    <div id="review"></div>
+    <p>This example accepts and outputs user-contributed text as-is. The provided text inserts a malicious script.</p>
+
+    <form>
+        <textarea id="reviewText" class="span8"><p onclick="alert('Ooopsies!')">Click me!</p>
+        </textarea>
+        <p style="margin-top:1em">
+            <input type="submit" class="btn"/>
+        </p>
+    </form>
+    
+    <div id="output"></div>
     
     <script>
-        var div = document.createElement('div');
-        div.innerHTML = "This camera is great!";
-        div.innerHTML += "<scr" + "ipt>alert('Hello, World!');</scr" + "ipt>";
+        var form = document.getElementsByTagName("form")[0];
+        form.onsubmit = function(e) {
+            e.preventDefault();
+            
+            var textarea = document.getElementById('reviewText');
 
-        document.getElementById('review').appendChild(div);
+            var output = document.getElementById('output');
+            output.innerHTML = textarea.value;
+        };
     </script>
 
 {% endblock %}
