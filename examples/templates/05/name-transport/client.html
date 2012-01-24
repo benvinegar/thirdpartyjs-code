@@ -23,9 +23,8 @@
             el.src = "{{ service_url_for('example', chapter='05', name='name-transport', file='server.html') }}";
 
             var done = false;
-            el.onreadystatechange = function () {
-                console.log(el.readyState);
-                if (!el.readyState == 'complete' || done)
+            var incoming = function () {
+                if (done || (el.readyState && el.readyState != 'complete'))
                     return;
 
                 var name = el.contentWindow.name;
@@ -35,10 +34,12 @@
                 }
             };
 
+            el.onload = incoming;
+            el.onreadystatechange = incoming;
             bd.appendChild(el);
         }
     </script>
-        
+
     <div>
         <button class="btn" onclick="start()">Start</button>
     </div>
