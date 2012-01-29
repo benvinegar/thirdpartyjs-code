@@ -1,0 +1,17 @@
+{% extends 'example.html' %}
+
+{% block content %}
+    
+    <div class="page-header">
+        <h1>Web Service API Wrapper</h1>
+    </div>
+
+    <script src="sdk.js"></script>
+    <script>
+        Stork.init(function() {
+            Stork.api('products', { id: 1337 }, function() {
+                console.log('success');
+            });
+        });
+    </script>
+{% endblock %}
