@@ -10,7 +10,7 @@ freezer = Freezer(app)
 @freezer.register_generator
 def example_url_generator():
     out = []
-    for dirname, dirnames, filenames in os.walk('examples/templates'):
+    for dirname, dirnames, filenames in os.walk(os.path.join('examples', 'templates')):
         if dirnames == []:
             parts = string.split(dirname, os.sep)
             for f in filenames:
