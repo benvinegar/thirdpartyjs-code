@@ -40,7 +40,7 @@ def trusted_domains(domain):
 
 
 def api_request(request, endpoint):
-    return {'name': 'Mikon 9000'}
+    return make_response(json.dumps({'name': 'Mikon 9000'}))
 
 from urlparse import urlparse
 import json
@@ -49,13 +49,13 @@ import json
 @app.route('/api/<endpoint>')
 def api(endpoint=None):
     domain = urlparse(request.headers['Referer']).hostname
-    if domain == 'publisher.dev':
+    if domain == 'widget.dev':
         domain = urlparse(request.headers['X-Publisher-Referer']).hostname
 
     api_key = request.args.get('apiKey')
 
     if domain in trusted_domains(api_key):
-        return api_request()
+        return api_request(request, endpoint)
     else:
         return make_response('Unauthorized domain: %s' % domain, 403)
 

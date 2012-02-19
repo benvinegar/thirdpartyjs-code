@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <script src="{{ service_url_for('static', filename='jquery.js') }}"></script>
+    <script src="{{ service_url_for('static', filename='easyxdm/easyXDM.js') }}"></script>
+    <script>
+    var rpc = new easyXDM.Rpc({}, { 
+        local: {
+            apiTunnel: function(endpoint, params, method, complete) {
+                var options = {
+                    url:      '{{ service_url }}/api/' + endpoint,
+                    data:     params,
+                    method:   method,
+                    complete: complete,
+                    headers:  {
+                        'X-Publisher-Referer': document.referrer
+                    }
+                };
+
+                jQuery.ajax(options);
+            }
+        }
+    });
+    </script>
+</html>
