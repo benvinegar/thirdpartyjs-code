@@ -1,28 +1,19 @@
 (function(window, undefined) {
     var Stork = {};
-    var document = window.document;
 
-    var rpc;
-
-    Stork.api = function() {
-        Stork.rpc.apiTunnel.apply(this, arguments);
-    };
+    if (window.Stork)
+        return;
 
     Stork.init = function(callback) {
-        Stork.script("{{ service_url_for('static', filename='easyxdm/easyXDM.js') }}", function() {
-            Stork.rpc = new easyXDM.Rpc({
-                remote: "{{ service_url_for('example', chapter='08', name='web-service-api', file='tunnel.html') }}",
-                onReady: callback
-            }, {
-                remote: {
-                    apiTunnel: {} // remote stub
-                }
-            });
+        Stork.script("{{ service_url_for('example', chapter='08', name='web-service-api', file='lib.js') }}", function () {
+            Stork._initializeLibrary(callback);
         });
     };
 
     window.Stork = Stork;
 })(this);
+
+// Embed the 'script' microlib into our initial script file for loading dependencies.
 
 {% include 'shared/script.js' %}
 

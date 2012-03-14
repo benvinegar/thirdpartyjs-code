@@ -1,0 +1,42 @@
+{% extends 'example.html' %}
+
+{% block content %}
+    
+    <div class="page-header">
+        <h1>Event Listeners</h1>
+    </div>
+
+    <p>This code binds to the 'productWidget.rendered' event described in the book.</p>
+
+    <pre id="log"></pre>
+
+    <script src="{{ service_url_for('example', chapter='08', name='web-service-api', file='sdk.js') }}"></script>
+    <script>
+
+        function log(msg) {
+            var el = document.getElementById('log');
+            el.style.display = 'block';
+            el.innerHTML += msg + "\n";
+        }
+
+        Stork.init(function() {
+            function handler () {
+                log("Triggered");;
+            }
+
+            log("Binding to render event");
+            Stork.listen('productWidget.rendered', handler);
+
+            log("Calling Stork.productWidget");
+            Stork.productWidget({ id: 1337, dom: 'stork-widget-location' });
+
+            log("Unbinding");
+            Stork.unlisten('productWidget.rendered', handler);
+
+            log("Calling Stork.productWidget");
+            Stork.productWidget({ id: 1337, dom: 'stork-widget-location' });
+
+            log("Should not see 'Triggered' again");
+        });
+    </script>
+{% endblock %}

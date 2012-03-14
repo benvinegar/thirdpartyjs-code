@@ -4,7 +4,6 @@ from flask import Flask, make_response, request
 
 app = Flask(__name__, static_url_path='/examples', static_folder='build')
 
-
 @app.route('/slow')
 def slow():
     """
