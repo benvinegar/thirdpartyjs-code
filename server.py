@@ -1,10 +1,8 @@
 import time
 import flask
-import json
 from flask import Flask, make_response, request
 
 app = Flask(__name__, static_url_path='/examples', static_folder='build')
-
 
 @app.route('/slow')
 def slow():
@@ -32,6 +30,35 @@ def cors():
     return r
 
 
+#========================================
+# API
+#========================================
+
+def trusted_domains(domain):
+    return ['publisher.dev']
+
+
+def api_request(request, endpoint):
+    return make_response(json.dumps({'name': 'Mikon 9000'}))
+
+from urlparse import urlparse
+import json
+
+
+@app.route('/api/<endpoint>')
+def api(endpoint=None):
+    domain = urlparse(request.headers['Referer']).hostname
+    if domain == 'widget.dev':
+        domain = urlparse(request.headers['X-Publisher-Referer']).hostname
+
+    api_key = request.args.get('apiKey')
+
+    if domain in trusted_domains(api_key):
+        return api_request(request, endpoint)
+    else:
+        return make_response('Unauthorized domain: %s' % domain, 403)
+
+
 @app.route('/login',  methods=['POST'])
 def login():
     """
@@ -43,4 +70,5 @@ def login():
     return r
 
 if __name__ == '__main__':
+    app.debug = True
     app.run()

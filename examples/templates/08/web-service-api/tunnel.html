@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <script src="{{ service_url_for('static', filename='jquery.js') }}"></script>
+    <script src="{{ service_url_for('static', filename='easyxdm/easyXDM.js') }}"></script>
+    <script>
+
+    function apiTunnel(endpoint, params, callback) {
+        var options = {
+            url:      '{{ service_url }}/api/' + endpoint,
+            data:     params,
+            type:     'GET',
+            complete: complete,
+            headers:  {
+                'X-Publisher-Referer': document.referrer
+            }
+        };
+
+        function complete(xhr) {
+            var response = {};
+
+            if (xhr.status !== 200)
+                response.error = xhr.responseText;
+            else
+                response.data = JSON.parse(xhr.responseText);
+
+            callback(response);
+        }
+
+        jQuery.ajax(options);
+    }
+
+    new easyXDM.Rpc({}, {
+        local: {
+            apiTunnel: apiTunnel
+        }
+    });
+    </script>
+</html>

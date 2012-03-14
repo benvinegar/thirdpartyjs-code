@@ -1,0 +1,22 @@
+{% extends 'example.html' %}
+
+{% block content %}
+    
+    <div class="page-header">
+        <h1>Web Service API Wrapper</h1>
+    </div>
+
+    <p>This code loads the Camera Stork SDK, then makes an API request using the SDK's Stork.api method. On success, the resulting JSON is posted below:</p>
+
+    <pre><code id="result"></code></pre>
+
+    <script src="sdk.js"></script>
+    <script>
+        Stork.init(function() {
+            Stork.api('products', { id: 1337 }, function(response) {
+                var result = document.getElementById('result');
+                result.innerHTML = JSON.stringify(response);
+            });
+        });
+    </script>
+{% endblock %}
