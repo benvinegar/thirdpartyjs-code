@@ -4,22 +4,13 @@
 
     var rpc;
 
-    Stork.api = function(endpoint, params, complete) {
-        rpc.apiTunnel(endpoint, params, 'GET', function(xhr) {
-            var response = {};
-
-            if (xhr.status !== 200)
-                response.error = xhr.responseText;
-            else
-                response.data = JSON.stringify(xhr.responseText);
-
-            complete(response);
-        });
+    Stork.api = function() {
+        Stork.rpc.apiTunnel.apply(this, arguments);
     };
 
     Stork.init = function(callback) {
         Stork.script("{{ service_url_for('static', filename='easyxdm/easyXDM.js') }}", function() {
-            rpc = new easyXDM.Rpc({
+            Stork.rpc = new easyXDM.Rpc({
                 remote: "{{ service_url_for('example', chapter='08', name='web-service-api', file='tunnel.html') }}",
                 onReady: callback
             }, {
