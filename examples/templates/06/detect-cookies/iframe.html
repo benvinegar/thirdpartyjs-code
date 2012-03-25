@@ -11,7 +11,8 @@
             }
             return false;
         }
-        window.parent.postMessage(testCanWriteCookies(), '{{ publisher_url }}');
+
+        window.parent.postMessage(JSON.stringify(testCanWriteCookies()), '{{ publisher_url }}');
         </script>
     </head>
 </html>

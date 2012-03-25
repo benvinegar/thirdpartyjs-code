@@ -29,10 +29,15 @@
         var target = document.getElementsByTagName('script')[0];
         target.parentNode.insertBefore(iframe, target);
 
-        window.onmessage = function(e) {
-            var id = e.data ? 'enabled' : 'disabled';
+        function onmessage(e) {
+            var id = JSON.parse(e.data) ? 'enabled' : 'disabled';
             document.getElementById(id).style.display = 'block';
         }
+
+        if (window.attachEvent)
+            window.attachEvent('onmessage', onmessage);
+        else
+            window.addEventListener('message', onmessage, false);
     })();
     </script>
 
