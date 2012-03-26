@@ -4,6 +4,47 @@ from flask import Flask, make_response, request
 
 app = Flask(__name__, static_url_path='/examples', static_folder='build')
 
+
+def get_weather_data(zip):
+    """
+    This is a stubbed function that returns the same static
+    data each time. In a real server environment, this would
+    query the database with the given zip parameter.
+    """
+
+    return {
+        'location': 'San Francisco',
+        'image': '/examples/common/partly_cloudy.png',
+        'temp': 78,
+        'desc': 'Partly Cloudy'
+    }
+
+
+@app.route('/widget.js')
+def weather_widget():
+    """
+    This is the server-side implementation of the weathernerby.com widget
+    from Chapter 1
+    """
+    zip = request.args.get('zip')
+    data = get_weather_data(zip)
+
+    out = '''
+        document.write(
+          '<div>' +
+          '    <p>%s</p>' +
+          '    <img src="%s"/> ' +
+          '    <p><strong>%s &deg;F</strong> &mdash; %s</p>' +
+          '</div>'
+        )
+    ''' % (data['location'], data['image'], data['temp'], data['desc'])
+
+    response = make_response(out)
+    response.headers['Content-Type'] = 'application/javascript'
+
+    return response
+
+
 @app.route('/slow')
 def slow():
     """
