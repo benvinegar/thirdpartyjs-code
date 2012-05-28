@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="UTF-8">
+
+		<title>QUnit Test Suite</title>
+		<link rel="stylesheet" href="{{ url_for('static', filename='qunit/qunit.css') }}">
+		<script src="{{ url_for('static', filename='qunit/qunit.js') }}"></script>
+		<script src="{{ url_for('static', filename='json2.js') }}"></script>
+
+		<script>
+			QUnit.module("JSON");
+
+			QUnit.test("test JSON.parse and JSON.stringify", function () {
+				expect(2);
+
+				var obj = {'chapter':'Testing',pages: [ 1, 2, 3 ] };
+
+			  equal(JSON.stringify(obj), '{"chapter":"Testing","pages":[1,2,3]}');
+			  equal(JSON.parse(JSON.stringify(obj)).chapter, obj.chapter);
+			});
+		</script>
+	</head>
+
+	<body>
+		<div id="qunit"></div>
+	</body>
+</html>

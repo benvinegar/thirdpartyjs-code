@@ -1,0 +1,172 @@
+<!doctype html>
+
+<html lang="en">
+	<head>
+		<title>Tests - Hiro</title>
+
+		<link rel="stylesheet" href="{{ url_for('static', filename='hiro/bootstrap.css') }}">
+		<link rel="stylesheet" href="{{ url_for('static', filename='hiro/webui.css') }}">
+
+		<!-- Fix glyphicons URL (needed only because of this Flask architecture) -->
+		<style>
+			[class*=" icon-"] {
+				background-image: url("{{ url_for('static', filename='hiro/img/glyphicons-halflings.png') }}");
+			}
+
+			.icon-white {
+				background-image: url("{{ url_for('static', filename='hiro/img/glyphicons-halflings-white.png') }}");
+			}
+		</style>
+
+		<script src="{{ url_for('static', filename='hiro/underscore.js') }}"></script>
+		<script src="{{ url_for('static', filename='hiro/jquery.js') }}"></script>
+		<script src="{{ url_for('static', filename='hiro/hiro.js') }}"></script>
+		<script src="{{ url_for('static', filename='hiro/webui.js') }}"></script>
+		<script src="{{ url_for('static', filename='hiro/phantom.js') }}"></script>
+	</head>
+
+	<body onload="main();">
+		<div class="container">
+			<div class="row-fluid">
+				<div class="span9">
+					<h2><img src="{{ url_for('static', filename='hiro/icon.jpg') }}"> Hiro</h2>
+				</div>
+
+				<div class="span3 runall">
+					<button class="btn btn-success">
+						<i class="icon-play icon-white"></i> Run all tests.
+					</button>
+				</div>
+			</div>
+
+			<div class="progress progress-success">
+				<div class="bar" style="width: 0%;"></div>
+			</div>
+
+			<div id="suite-views">
+			</div>
+
+			<div class="footer">
+				<i class="icon-barcode"></i>
+			</div>
+		</div>
+
+		<script id="template-suite" type="hiro/template">
+			<table class="table table-bordered suite" id="suite-<%= suiteName %>">
+				<thead>
+					<tr>
+						<th colspan="2"><%= suiteName %></th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<% _.each(tests, function (name) { %>
+					<tr class="test-<%= name %>">
+						<td><%= name %></td>
+						<td class="status">
+							<span data-state="ready" class="label">READY</span>
+						</td>
+					</tr>
+
+					<tr class="report report-<%= name %>" style="display:none;">
+						<td colspan="2"></td>
+					</tr>
+					<% }); %>
+				</tbody>
+			</table>
+		</script>
+
+		<script id="template-report" type="hiro/template">
+			<table>
+				<tr>
+					<td>Assertion:</td>
+					<td><code><%= assertion %></code></td>
+				</tr>
+
+				<tr>
+					<td>Expected:</td>
+					<td><code><%= expected %></code></td>
+				</tr>
+
+				<tr>
+					<td>Actual:</td>
+					<td><code><%= actual %></code></td>
+				</tr>
+
+				<% if (location) { %>
+				<tr>
+					<td>Location:</td>
+					<td><code><%= location %></code></td>
+				</tr>
+				<% } %>
+			</table>
+		</script>
+
+		<script id="template-report-error" type="hiro/template">
+			<table>
+				<tr>
+					<td><%= source %>:</td>
+					<td><code><%= message %></code></td>
+				</tr>
+
+				<% if (location) { %>
+				<tr>
+					<td>Location:</td>
+					<td><code><%= location %></code></td>
+				</tr>
+				<% } %>
+			</table>
+		</script>
+
+		<!--
+			REPLACE these examples with your own test suites and
+			tests. Docs: http://hirojs.com/
+		-->
+
+		<textarea type="hiro/fixture" data-name="clean">
+			<html>
+				<head>
+					<script src="{{ url_for('static', filename='json2.js') }}"></script>
+				</head>
+			</html>
+		</textarea>
+
+		<textarea class="fixture" data-name="overwritten" type="hiro/fixture">
+			<html>
+				<head>
+					<script src="{{ url_for('static', filename='json2.js') }}"></script>
+					<script>
+						Object.prototype.toJSON = function () {
+							return 'Hello';
+						};
+					</script>
+				</head>
+			</html>
+		</textarea>
+
+		<script>
+			hiro.module("JSONTests", {
+				setUp: function () {
+					this.loadFixture({ name: 'clean' });
+				},
+
+				testStringifyParse: function (test) {
+					test.expect(2);
+
+					var obj = { "chapter": "Testing", "pages": [ 1, 2, 3 ] };
+
+					test.assertEqual(this.window.JSON.stringify(obj), '{"chapter":"Testing","pages":[1,2,3]}');
+					test.assertEqual(this.window.JSON.parse(this.window.JSON.stringify(obj)).chapter, obj.chapter);
+				}
+			});
+
+			hiro.module("OverwrittenJSONTests", {
+				mixin: [ "JSONTests" ],
+
+				setUp: function () {
+					this.loadFixture({ name: 'overwritten' });
+				}
+			});
+		</script>
+	</body>
+</html>

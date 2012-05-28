@@ -1,0 +1,41 @@
+div.container {
+	width: 700px;
+}
+
+h2 {
+	margin: 75px 0 25px 0;
+}
+
+h2 img {
+	margin-top: -13px;
+}
+
+div.runall {
+	margin: 75px 0 25px 0;
+	text-align: right;
+}
+
+table.suite {
+	margin: 25px 0 0 0;
+}
+
+table.suite td.status {
+	width: 100px;
+	text-align: center;
+}
+
+table.suite tr.report td {
+	background-color: #EEE;
+}
+
+table.suite tr.report td table td {
+	border: none;
+}
+
+div.footer {
+	text-align: center;
+	margin-top: 100px;
+}
+
+/* Don't show fixture elements */
+textarea { display: none; }
