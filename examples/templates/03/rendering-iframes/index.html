@@ -9,17 +9,18 @@
     
     <script id="src-less">
         var iframe = document.createElement('iframe');
-        iframe.style.width = '300px';
-        iframe.style.height = '250px';
+        iframe.style.width = '250px';
+        iframe.style.height = '300px';
         iframe.style.border = 'none';
 
         var insert = document.getElementById('src-less');
         insert.parentNode.insertBefore(iframe, insert);
 
         iframe.contentWindow.document.write(
-            '<h3>Fugi QuickCam 3000</h3>' +
+            '<h3>Mikon E90 Digital SLR</h3>' +
             '<img src="{{ url_for('static', filename='camera-stock-150.jpg') }}"/>' +
-            '<p>$299.99</p>'
+            '<p>$599.99</p>' +
+            '<p>4.3/5.0 &bull; 176 Reviews</p>'
         );
     </script>
 
@@ -27,8 +28,8 @@
 
     <script id="external">
         var iframe = document.createElement('iframe');
-        iframe.style.width = '300px';
-        iframe.style.height = '250px';
+        iframe.style.width = '250px';
+        iframe.style.height = '300px';
         iframe.style.border = 'none';
         iframe.src = "{{ service_url_for('example', chapter='03', name='rendering-iframes', file='iframe.html') }}";
 
