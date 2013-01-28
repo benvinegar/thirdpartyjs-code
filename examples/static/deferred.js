@@ -33,10 +33,13 @@
     function insideViewport(el) {
         var win = getWindowDimensions();
         var pos = getPosition(el);
-        return pos.top >= win.scrollTop &&
-           pos.top <= win.scrollTop + win.height;
-    }
 
+        var top = pos.top;
+        var bot = pos.top + el.offsetHeight;
+
+        return bot >= win.scrollTop &&
+            top <= win.scrollTop + win.height;
+    }
 
     function whenVisible(callback) {
         var el = document.getElementById('stork-container');
@@ -54,7 +57,7 @@
     function debounce(el, name, handler, delay) {
         var exec;
 
-        var listener = function (ev) {
+        function wrapper(ev) {
             if (exec) {
                clearTimeout(exec);
             }
@@ -62,12 +65,12 @@
             exec = setTimeout(function () {
                 handler(ev);
             }, delay);
-        };
+        }
 
         if (el.addEventListener)
-            return el.addEventListener(name, listener, false);
+            return el.addEventListener(name, wrapper, false);
         else
-            return el.attachEvent('on' + name, listener);
+            return el.attachEvent('on' + name, wrapper);
     }
 
     whenVisible(function () {

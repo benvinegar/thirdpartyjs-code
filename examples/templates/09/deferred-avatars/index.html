@@ -1,0 +1,28 @@
+{% extends 'example.html' %}
+
+{% block content %}
+
+    <div class="page-header">
+        <h1>Deferred images</h1>
+    </div>
+
+    <p>On this page are 10 img elements whose contents are deferred. As you scroll down the page, and the img elements enter the viewport, the correct src is swapped in.</p>
+
+    <style>
+    .avatar { margin-bottom: 250px; }
+    .avatar img { height: 100px; width: 100px; }
+    </style>
+
+    <div class="avatar"><img class="dsq-deferred-avatar" src="{{ url_for('static', filename='grey-1x1.png') }}" data-dsq-src="{{ url_for('static', filename='avatar.jpg') }}?1"></div>
+    <div class="avatar"><img class="dsq-deferred-avatar" src="{{ url_for('static', filename='grey-1x1.png') }}" data-dsq-src="{{ url_for('static', filename='avatar.jpg') }}?2"></div>
+    <div class="avatar"><img class="dsq-deferred-avatar" src="{{ url_for('static', filename='grey-1x1.png') }}" data-dsq-src="{{ url_for('static', filename='avatar.jpg') }}?3"></div>
+    <div class="avatar"><img class="dsq-deferred-avatar" src="{{ url_for('static', filename='grey-1x1.png') }}" data-dsq-src="{{ url_for('static', filename='avatar.jpg') }}?4"></div>
+    <div class="avatar"><img class="dsq-deferred-avatar" src="{{ url_for('static', filename='grey-1x1.png') }}" data-dsq-src="{{ url_for('static', filename='avatar.jpg') }}?5"></div>
+    <div class="avatar"><img class="dsq-deferred-avatar" src="{{ url_for('static', filename='grey-1x1.png') }}" data-dsq-src="{{ url_for('static', filename='avatar.jpg') }}?6"></div>
+    <div class="avatar"><img class="dsq-deferred-avatar" src="{{ url_for('static', filename='grey-1x1.png') }}" data-dsq-src="{{ url_for('static', filename='avatar.jpg') }}?7"></div>
+    <div class="avatar"><img class="dsq-deferred-avatar" src="{{ url_for('static', filename='grey-1x1.png') }}" data-dsq-src="{{ url_for('static', filename='avatar.jpg') }}?8"></div>
+    <div class="avatar"><img class="dsq-deferred-avatar" src="{{ url_for('static', filename='grey-1x1.png') }}" data-dsq-src="{{ url_for('static', filename='avatar.jpg') }}?9"></div>
+    <div class="avatar"><img class="dsq-deferred-avatar" src="{{ url_for('static', filename='grey-1x1.png') }}" data-dsq-src="{{ url_for('static', filename='avatar.jpg') }}?10"></div>
+
+    <script src="{{ url_for('static', filename='deferred-avatars.js') }}"></script>
+{% endblock %}
