@@ -90,7 +90,7 @@ import json
 def api(endpoint=None):
     domain = urlparse(request.headers['Referer']).hostname
     if domain == 'widget.dev':
-        domain = urlparse(request.headers['X-Publisher-Referer']).hostname
+        domain = urlparse(request.headers['CameraStork-Publisher-Origin']).hostname
 
     api_key = request.args.get('apiKey')
 

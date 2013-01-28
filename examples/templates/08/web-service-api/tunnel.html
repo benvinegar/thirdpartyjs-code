@@ -11,7 +11,7 @@
             type:     'GET',
             complete: complete,
             headers:  {
-                'X-Publisher-Referer': document.referrer
+                'CameraStork-Publisher-Origin': rpc.origin
             }
         };
 
@@ -29,7 +29,7 @@
         jQuery.ajax(options);
     }
 
-    new easyXDM.Rpc({}, {
+    var rpc = new easyXDM.Rpc({}, {
         local: {
             apiTunnel: apiTunnel
         }
